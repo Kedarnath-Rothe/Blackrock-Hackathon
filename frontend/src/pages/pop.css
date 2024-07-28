@@ -1,0 +1,18 @@
+.popup {
+    position: fixed;
+    top: 50%; /* Position the popup in the middle of the screen */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    z-index: 1000; /* Ensure popup appears above other content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for better visibility */
+  }
+  
+  .popup-content {
+    text-align: center;
+  }
+  
+  /* Additional styling as per your design */
+  
