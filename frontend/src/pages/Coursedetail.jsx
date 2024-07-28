@@ -1,12 +1,15 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
+import { IoIosCall } from "react-icons/io";
 import { Link, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useAuth } from "../store/auth";
 
 
+
 const AdminUpdate = () => {
     const params = useParams();
-    const { courses } = useAuth();
+    const { courses, user } = useAuth();
     const [courseData, setCourseData] = useState(null);
 
     useEffect(() => {
@@ -25,6 +28,20 @@ const AdminUpdate = () => {
         }
     }, [courses, params.id]);
 
+    const handleCallMeClick = async (course) => {
+        try {
+            // console.log("hhss");
+            const response = await axios.post('https://blackrock-hackathon.vercel.app/api/form/contact/mentorship', {
+                user,
+                course
+            });
+            alert(`Call initiated: ${response.data.message}`);
+        } catch (error) {
+            console.error('Error initiating call:', error);
+            alert('Failed to initiate call.');
+        }
+    };
+
     return (
         <>
             <section className="section-car-details">
@@ -35,6 +52,11 @@ const AdminUpdate = () => {
                     <section className="section-form">
                         {courseData && (
                             <>
+
+                                <Link style={{ marginLeft: "2rem", fontSize: "3rem", color: "green" }} to="#" onClick={() => handleCallMeClick(courseData)}>
+                                    <IoIosCall style={{ fontSize: "3rem", color: "green" }} /> call me
+                                </Link>
+
                                 <table>
                                     <tbody>
                                         <tr>
@@ -48,7 +70,7 @@ const AdminUpdate = () => {
                                         <tr>
                                             <td>Price</td>
                                             <td>$ {courseData.price} </td>
-                                        </tr>  
+                                        </tr>
                                         <tr>
                                             <td>Details</td>
                                             <td>{courseData.details}</td>
@@ -58,7 +80,7 @@ const AdminUpdate = () => {
                                 </table>
                                 <br />
                                 <br />
-                                <div style={{margin:"auto"}} className="btn">
+                                <div style={{ margin: "auto" }} className="btn">
                                     {!courseData.booked && (
                                         <Link className="book book2" to={`/user/buycourse/${courseData._id}`}>
                                             Buy Now
