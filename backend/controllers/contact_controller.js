@@ -6,16 +6,16 @@ const twilio = require('twilio');
 const Client = twilio;
 
 const Course = require('../models/courses_model');
- 
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 const contactForm = async (req, res) => {
-    const { name, email, mobile, message } = req.body;
+  const { name, email, mobile, message } = req.body;
 
-    console.log(message);
+  console.log(message);
 
-//   const newContact = new Contact({ name, email, mobile, message });
-//   await newContact.save();
+  //   const newContact = new Contact({ name, email, mobile, message });
+  //   await newContact.save();
 
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
@@ -54,7 +54,7 @@ const contactForm = async (req, res) => {
     const querywords = message.split(/\s+/);
     console.log(querywords);
     const courses = await Course.find({}).limit(10);
-    
+
     const calculateMatchScore = (course) => {
       let matchScore = 0;
       const courseWords = [...course.courseName.split(/\s+/), ...course.details.split(/\s+/), ...course.tags.split(/\s+/)];
@@ -66,15 +66,15 @@ const contactForm = async (req, res) => {
       console.log(`Course: ${course.courseName}, Match Score: ${matchScore}`);
       return matchScore;
     }
-    
+
     // Calculate match score for each course and sort them by their match scores
     const sortedCourses = courses
       .map(course => ({ course, matchScore: calculateMatchScore(course) }))
       .sort((a, b) => b.matchScore - a.matchScore);
-    
+
     // Determine the number of top courses to select based on match scores
     const numTopCourses = sortedCourses.filter(item => item.matchScore > 0).length;
-    
+
     // Select top courses
     const topCourses = sortedCourses.slice(0, numTopCourses).map(item => item.course);
 
@@ -84,13 +84,13 @@ const contactForm = async (req, res) => {
 
     // console.log("hi");
 
-    if(topCourses.length === 0){
+    if (topCourses.length === 0) {
       console.log("Course not found")
     }
 
 
     const courseLinks = topCourses.map(course => `https://wealthify01.vercel.app/user/courseDetails/${course._id}`).join('\n');
-        const messageBody = `Response: ${responseMessage}\n\nTop Courses Based on Your Query:\n${courseLinks}`;
+    const messageBody = `Response: ${responseMessage}\n\nTop Courses Based on Your Query:\n${courseLinks}`;
 
 
     client.messages.create({
@@ -116,29 +116,29 @@ const auth_token1 = '9f59b27e3591ca6fc62e46df98182192';
 const client1 = new Client(account_sid1, auth_token1);
 
 const mentorShip = async (req, res) => {
-    const { user, course } = req.body;
-    console.log(user.phone);
-    console.log("hhhh");
-    console.log(course.courseName);
+  const { user, course } = req.body;
+  console.log(user.phone);
+  console.log("hhhh");
+  console.log(course.courseName);
 
-    client1.calls.create({
-        twiml: `<Response><Say>Hello ${user.username}, this is about the course: ${course.courseName}. So here is the information you needed about the course : ${course.details}</Say></Response>`,
-        to: `91${user.phone}`,
-        from: '+13612734944',
-        statusCallback: 'http://yourapp.com/calls/events',
-        statusCallbackMethod: 'POST'
-    })
+  client1.calls.create({
+    twiml: `<Response><Say>Hello ${user.username}, this is about the course: ${course.courseName}. So here is the information you needed about the course : ${course.details}</Say></Response>`,
+    to: `91${user.phone}`,
+    from: '+13612734944',
+    statusCallback: 'http://yourapp.com/calls/events',
+    statusCallbackMethod: 'POST'
+  })
     .then(call => {
-        console.log("then");
-        res.status(200).send({ message: `Call initiated with SID: ${call.sid}` });
+      console.log("then");
+      res.status(200).send({ message: `Call initiated with SID: ${call.sid}` });
     })
     .catch(error => {
       console.log(error.message);
-        res.status(500).send({ message: `Error initiating call: ${error.message}` });
+      res.status(500).send({ message: `Error initiating call: ${error.message}` });
     });
 };
 
 module.exports = {
-    contactForm,
-    mentorShip
+  contactForm,
+  mentorShip
 };

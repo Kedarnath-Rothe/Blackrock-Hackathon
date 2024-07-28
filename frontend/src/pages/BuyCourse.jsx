@@ -101,6 +101,8 @@ const UserUpdate = () => {
                 body: JSON.stringify(updatedCourseData),
             });
 
+            console.log(response);
+
             if (response.ok) {
                 toast.success("Updated Successfully...");
                 window.location.href = `/userhistory`;
