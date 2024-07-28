@@ -47,7 +47,7 @@ const Popup = ({ close }) => {
     e.preventDefault();
     try {
       const dataToSend = { ...formData, message: useAudio ? transcript : formData.message };
-      await axios.post('http://localhost:8080/api/form/contact', dataToSend); // Updated endpoint URL
+      await axios.post('https://blackrock-hackathon.vercel.app/api/form/contact', dataToSend); // Updated endpoint URL
       alert('Message sent successfully');
       setFormData({
         name: '',

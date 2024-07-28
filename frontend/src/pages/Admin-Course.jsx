@@ -10,7 +10,7 @@ const AdminCourse = () => {
 
   const getAllCoursesData = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/admin/courses", {
+      const response = await fetch("https://blackrock-hackathon.vercel.app/api/admin/courses", {
         method: "GET",
         headers: {
           Authorization: authorizationToken,
@@ -43,7 +43,7 @@ const AdminCourse = () => {
   
   const deleteCourse = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/admin/courses/delete/${id}`, {
+      const response = await fetch(`https://blackrock-hackathon.vercel.app/api/admin/courses/delete/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: authorizationToken,

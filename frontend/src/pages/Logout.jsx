@@ -8,7 +8,7 @@ const Logout = () => {
     useEffect(() => {
         const logout = async () => {
             try {
-                await axios.post('http://localhost:8080/api/auth/logout', { userId: user._id });
+                await axios.post('https://blackrock-hackathon.vercel.app/api/auth/logout', { userId: user._id });
                 LogoutUser();
                 window.location.href = `/login`;
             } catch (error) {

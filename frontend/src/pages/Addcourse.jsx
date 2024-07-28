@@ -91,7 +91,7 @@ const Addcourse = () => {
             formData.append("category", course.category); // Append category to formData
             formData.append("tags", course.tags); // Append tags as a string
 
-            const response = await fetch('http://localhost:8080/api/data/addCourse', {
+            const response = await fetch('https://blackrock-hackathon.vercel.app/api/data/addCourse', {
                 method: "POST",
                 headers: {
                     "X-Additional-Info": imgUrl // Custom header with additional info

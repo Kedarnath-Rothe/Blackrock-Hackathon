@@ -18,7 +18,7 @@ const PasswordResetPage = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:8080/api/auth/resetPass/${id}/${token}`, {
+            const response = await fetch(`https://blackrock-hackathon.vercel.app/api/auth/resetPass/${id}/${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

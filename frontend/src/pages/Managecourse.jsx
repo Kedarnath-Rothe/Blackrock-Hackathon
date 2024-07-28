@@ -21,7 +21,7 @@ const Managecourse = () => {
 
     const deleteCourse = async (id) => {
         try {
-            const response = await fetch(`http://localhost:8080/api/admin/courses/delete/${id}`, {
+            const response = await fetch(`https://blackrock-hackathon.vercel.app/api/admin/courses/delete/${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: authorizationToken,

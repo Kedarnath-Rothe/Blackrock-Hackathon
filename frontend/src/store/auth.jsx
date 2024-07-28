@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     try{
       if(!isLoggedIn) return ;
       setIsLoading(true);
-      const response = await fetch('http://localhost:8080/api/auth/user',{
+      const response = await fetch('https://blackrock-hackathon.vercel.app/api/auth/user',{
         method : "GET",
         headers : {
           Authorization : authorizationToken
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
 
   const getCourses = async () => {
     try { 
-        const response = await fetch('http://localhost:8080/api/data/course', {
+        const response = await fetch('https://blackrock-hackathon.vercel.app/api/data/course', {
             method: "GET"
         });
 

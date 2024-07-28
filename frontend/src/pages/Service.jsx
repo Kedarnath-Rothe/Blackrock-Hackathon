@@ -19,7 +19,7 @@ const Courses = () => {
     const handleCallMeClick = async (course) => {
         try {
             // console.log("hhss");
-            const response = await axios.post('http://localhost:8080/api/form/contact/mentorship', {
+            const response = await axios.post('https://blackrock-hackathon.vercel.app/api/form/contact/mentorship', {
                 user,
                 course
             });

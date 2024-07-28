@@ -42,7 +42,7 @@ const UserUpdate = () => {
     useEffect(() => {
         const getSingleCourseData = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/api/auth/buycourse/${params.id}`, {
+                const response = await fetch(`https://blackrock-hackathon.vercel.app/api/auth/buycourse/${params.id}`, {
                     method: "GET",
                     headers: {
                         Authorization: authorizationToken,
@@ -92,7 +92,7 @@ const UserUpdate = () => {
             const totalPrice = totalHours * parseInt(courseData.price);
             const updatedCourseData = { ...courseData, total: totalPrice, booked: true, transaction_id: generateTransactionId() };
 
-            const response = await fetch(`http://localhost:8080/api/auth/buycourse/update/${params.id}`, {
+            const response = await fetch(`https://blackrock-hackathon.vercel.app/api/auth/buycourse/update/${params.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -120,7 +120,7 @@ const UserUpdate = () => {
     const handleCallMeClick = async (course) => {
         try {
             // console.log("hhss");
-            const response = await axios.post('http://localhost:8080/api/form/contact/mentorship', {
+            const response = await axios.post('https://blackrock-hackathon.vercel.app/api/form/contact/mentorship', {
                 user,
                 course
             });
