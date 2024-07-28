@@ -89,7 +89,7 @@ const contactForm = async (req, res) => {
     }
 
 
-    const courseLinks = topCourses.map(course => `http://localhost:5173/user/courseDetails/${course._id}`).join('\n');
+    const courseLinks = topCourses.map(course => `https://wealthify01.vercel.app/user/courseDetails/${course._id}`).join('\n');
         const messageBody = `Response: ${responseMessage}\n\nTop Courses Based on Your Query:\n${courseLinks}`;
 
 

@@ -80,7 +80,7 @@ let transporter = nodemailer.createTransport({
 
 //lets tackle cors policy
 const corsOptions = {
-    origin : "http://localhost:5173",
+    origin : "https://wealthify01.vercel.app",
     methods : "GET, POST, PUT, DELETE, PATCH, HEAD",
     Credential : true,
 }

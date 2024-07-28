@@ -62,7 +62,7 @@ const register = async (req, res) => {
             userId: userCreated._id,
             token: crypto.randomBytes(32).toString("hex"),
         }).save();
-        const url = `http://localhost:5173/${userCreated.id}/verify/${token.token}`;
+        const url = `https://wealthify01.vercel.app/${userCreated.id}/verify/${token.token}`;
         await sendEmail(userCreated.email, "Verify Email", url);
 
 
@@ -137,7 +137,7 @@ const login = async (req, res) => {
                     token: crypto.randomBytes(32).toString("hex"),
                 }).save();
 
-                const verificationUrl = `http://localhost:5173/${userExist.id}/verify/${token.token}`;
+                const verificationUrl = `https://wealthify01.vercel.app/${userExist.id}/verify/${token.token}`;
                 await sendEmail(userExist.email, "Verify Email", verificationUrl);
                 console.log("ha");
                 return res.status(400).json({
@@ -215,7 +215,7 @@ const resetPassword = async (req, res) => {
 
 
         // Send password reset email
-        const resetLink = `http://localhost:5173/reset/${user._id}/${token.token}`;
+        const resetLink = `https://wealthify01.vercel.app/reset/${user._id}/${token.token}`;
         await sendEmail(email, "Password Reset Request", resetLink);
 
         res.status(200).json({ message: 'Password reset email sent successfully.' });
