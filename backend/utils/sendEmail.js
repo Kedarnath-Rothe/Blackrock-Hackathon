@@ -8,7 +8,7 @@ module.exports = async (email, subject, text) => {
 			secure: false,
             requireTLS : true,
 			auth: {
-				user: "kedarnath2003@gmail.com",
+				user: "kedarnathrothe2003@gmail.com",
 				pass: 'scmpzcmtrocqcvbv',
 			},
 		});
